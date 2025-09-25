@@ -1,0 +1,20 @@
+{% extends 'base.html' %}
+
+{% block header %}
+<h1>{% block title %}Delete Account{% endblock %}</h1>
+{% endblock %}
+
+{% block content %}
+<p>Are you sure you want to delete your account <strong>{{ current_user.username }}</strong>?</p>
+<p>This action cannot be undone. Please enter your password to confirm.</p>
+
+<form method="post" action="{{ url_for('auth.delete_account') }}">
+  <label for="password">Confirm Password:</label>
+  <input type="password" name="password" id="password" required>
+  <input type="submit" value="Yes, delete my account permanently">
+</form>
+
+<form method="get" action="{{ url_for('index') }}">
+  <input type="submit" value="Cancel">
+</form>
+{% endblock %}
