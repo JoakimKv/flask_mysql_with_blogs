@@ -26,25 +26,14 @@ All users (that are not test users for pytest) have the password `root`.
 
 ## Project Structure  
 
-An simplified overview:
+A simplified overview:
 
-flask_mysql_with_blogs/
-│
-├── flaskr_carved_rock/ # Main Flask application package
-│ ├── init.py # App factory
-│ ├── db_connection_wrapper.py
-│ ├── database_connection_data.py
-│ ├── models/ # ORM and database models
-│ └── templates/ 
-│
-├── migrations/ # Alembic migration scripts
-├── tests/ # Unit and integration tests
-│ ├── conftest.py
-│ └── test_db.py
-│
-├── requirements.txt
-├── pyproject.toml
-└── README.md
+- The main folder: 'flask_mysql_with_blogs'.
+
+- 'flaskr_carved_rock': -> Main Flask application package (inside the main folder).
+- 'migrations': -> Alembic migration scripts (inside the main folder).
+- 'tests': -> Unit and integration tests (inside the main folder).
+
 
 Note that there is a folder called 'heidisql' that contains three mysql scripts that can be run in 'HeidiSQL':
 
@@ -72,18 +61,21 @@ Sample schema and data are provided in ('db_flask1.sql').
 
 On windows 11:
 
-To start the virtual environment: python -m venv venvflask1
-To enable scripts (if necessary): Set-ExecutionPolicy RemoteSigned -Scope CurrentUser
-To activate script / environment: venvflask1\Scripts\activate
+- To start the virtual environment: python -m venv venvflask1
 
-To install packages: pip install -r requirements.txt
-If you want to install all the package manually then the file 'pip_install.txt' can be of use. 
+- To enable scripts (if necessary): Set-ExecutionPolicy RemoteSigned -Scope CurrentUser
 
-Don't forget to populate your mysql database from 'db_flask1.sql' in the 'heidisql' folder.
+- To activate script / environment: venvflask1\Scripts\activate
 
-To start the server (in debug mode): python -m flask run --host=0.0.0.0 --port=5000 --debug
+- To install packages: pip install -r requirements.txt
 
-Then write the following in a web browser: localhost:5000
+- If you want to install all the package manually then the file 'pip_install.txt' can be of use. 
+
+- Don't forget to populate your mysql database from 'db_flask1.sql' in the 'heidisql' folder.
+
+- To start the server (in debug mode): python -m flask run --host=0.0.0.0 --port=5000 --debug
+
+- Then write the following in a web browser: localhost:5000
 
 ## Running pytests
 
