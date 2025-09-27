@@ -1,42 +1,51 @@
 -- Insert users
 
 INSERT INTO
-    `user` (username, password)
+    `user` (username, password, uuid)
 VALUES (
         'Jason',
-        'pbkdf2:sha256:150000$6ExJIyka$099bc8963e17d2c19e313db176de51b6ac2785d7c0677a7a7cd21735c74f7371'
+        'pbkdf2:sha256:150000$6ExJIyka$099bc8963e17d2c19e313db176de51b6ac2785d7c0677a7a7cd21735c74f7371',
+        UUID()
     ),
     (
         'Cleo',
-        'pbkdf2:sha256:150000$6ExJIyka$099bc8963e17d2c19e313db176de51b6ac2785d7c0677a7a7cd21735c74f7371'
+        'pbkdf2:sha256:150000$6ExJIyka$099bc8963e17d2c19e313db176de51b6ac2785d7c0677a7a7cd21735c74f7371',
+        UUID()
     ),
     (
         'Rea',
-        'pbkdf2:sha256:150000$6ExJIyka$099bc8963e17d2c19e313db176de51b6ac2785d7c0677a7a7cd21735c74f7371'
+        'pbkdf2:sha256:150000$6ExJIyka$099bc8963e17d2c19e313db176de51b6ac2785d7c0677a7a7cd21735c74f7371',
+        UUID()
     ),
     (
         'Serenity',
-        'pbkdf2:sha256:150000$6ExJIyka$099bc8963e17d2c19e313db176de51b6ac2785d7c0677a7a7cd21735c74f7371'
+        'pbkdf2:sha256:150000$6ExJIyka$099bc8963e17d2c19e313db176de51b6ac2785d7c0677a7a7cd21735c74f7371',
+        UUID()
     ),
     (
         'Jorja',
-        'pbkdf2:sha256:150000$6ExJIyka$099bc8963e17d2c19e313db176de51b6ac2785d7c0677a7a7cd21735c74f7371'
+        'pbkdf2:sha256:150000$6ExJIyka$099bc8963e17d2c19e313db176de51b6ac2785d7c0677a7a7cd21735c74f7371',
+        UUID()
     ),
     (
         'Arian',
-        'pbkdf2:sha256:150000$6ExJIyka$099bc8963e17d2c19e313db176de51b6ac2785d7c0677a7a7cd21735c74f7371'
+        'pbkdf2:sha256:150000$6ExJIyka$099bc8963e17d2c19e313db176de51b6ac2785d7c0677a7a7cd21735c74f7371',
+        UUID()
     ),
     (
         'Kai',
-        'pbkdf2:sha256:150000$6ExJIyka$099bc8963e17d2c19e313db176de51b6ac2785d7c0677a7a7cd21735c74f7371'
+        'pbkdf2:sha256:150000$6ExJIyka$099bc8963e17d2c19e313db176de51b6ac2785d7c0677a7a7cd21735c74f7371',
+        UUID()
     ),
     (
         'Kaitlin',
-        'pbkdf2:sha256:150000$6ExJIyka$099bc8963e17d2c19e313db176de51b6ac2785d7c0677a7a7cd21735c74f7371'
+        'pbkdf2:sha256:150000$6ExJIyka$099bc8963e17d2c19e313db176de51b6ac2785d7c0677a7a7cd21735c74f7371',
+        UUID()
     ),
     (
         'David',
-        'pbkdf2:sha256:150000$6ExJIyka$099bc8963e17d2c19e313db176de51b6ac2785d7c0677a7a7cd21735c74f7371'
+        'pbkdf2:sha256:150000$6ExJIyka$099bc8963e17d2c19e313db176de51b6ac2785d7c0677a7a7cd21735c74f7371',
+        UUID()
     );
 
 -- Insert posts
