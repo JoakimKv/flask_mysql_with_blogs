@@ -1,0 +1,25 @@
+
+(Set-ExecutionPolicy RemoteSigned -Scope CurrentUser)
+(python -m venv venvflask1)
+(venvflask1\Scripts\activate)
+(pip install -r requirements.txt)
+(pip freeze > requirements.txt)
+(python -m flask run --host=0.0.0.0 --port=5000 --debug)
+
+(On server:)
+('docker compose up -d --build')
+('docker ps' or 'docker ps -a')
+('docker compose down')
+
+
+pip install pymysql
+pip install mysqlclient
+pip install flask 
+pip install flask-login 
+pip install flask-sqlalchemy 
+pip install flask-migrate 
+pip install is-safe-url
+pip install gunicorn
+pip install cryptography
+
+pip install coverage pylint pytest-cov yapf pytest-watch

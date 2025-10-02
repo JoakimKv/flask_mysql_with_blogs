@@ -1,0 +1,10 @@
+services:
+  app:
+    build: .
+    restart: always
+    extra_hosts:
+      - "host.docker.internal:host-gateway"
+    env_file:
+      - /etc/secrets/mysql/keys/.env
+    ports:
+      - "8000:8000"
