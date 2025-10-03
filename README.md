@@ -79,6 +79,8 @@ On windows 11 (and an ubuntu server):
 
 - Then write the following in a web browser: localhost:5000 or your own "server adress".
 
+- The flask app is running in a docker. The nginx and the mysql database is run on a ubuntu server, they are not dockerized and are run with services on the ubuntu server. The file 'blogs.conf' is needed to configure the different ports that are used to run the program.
+
 ## Running pytests
 
 The following pytests can be run (in 'flask_mysql_with_blogs' folder):
