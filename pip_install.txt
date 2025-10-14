@@ -3,7 +3,7 @@
 (python -m venv venvflask1)
 (venvflask1\Scripts\activate)
 (python -m pip install -r requirements.txt)
-(pip freeze > requirements.txt)
+(python -m pip freeze > requirements.txt)
 (python -m flask run --host=0.0.0.0 --port=5000 --debug)
 
 (On server:)
@@ -23,4 +23,4 @@ python -m pip install gunicorn
 python -m pip install cryptography
 python -m pip install python-dotenv
 
-pip install coverage pylint pytest-cov yapf pytest-watch
+python -m pip install coverage pylint pytest-cov yapf pytest-watch
