@@ -12,14 +12,15 @@
 ('docker compose down')
 
 
-pip install pymysql
-pip install mysqlclient
-pip install flask 
-pip install flask-login 
-pip install flask-sqlalchemy 
-pip install flask-migrate 
-pip install is-safe-url
-pip install gunicorn
-pip install cryptography
+python -m pip install pymysql
+python -m pip install mysqlclient
+python -m pip install flask 
+python -m pip install flask-login 
+python -m pip install flask-sqlalchemy 
+python -m pip install flask-migrate 
+python -m pip install is-safe-url
+python -m pip install gunicorn
+python -m pip install cryptography
+python -m pip install python-dotenv
 
 pip install coverage pylint pytest-cov yapf pytest-watch

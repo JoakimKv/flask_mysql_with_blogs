@@ -3,21 +3,23 @@
 
 
 import os
+from secret_vault_class import SecretVault 
 
 
 class DatabaseConnectionData:
 
+    secretVault = SecretVault()
 
-    PRODUCTION_DATABASE = "db_flask1"
-    TESTING_DATABASE = "carved_rock_test"
-    MYSQL_USERNAME = os.getenv("MYSQL_USERNAME")
-    MYSQL_PASSWORD = os.getenv("MYSQL_PASSWORD")
-    MYSQL_HOST = os.getenv("MYSQL_HOST", "localhost")
-    MYSQL_PORT = int(os.getenv("MYSQL_PORT", "3306"))
-    MYSQL_BLOGS_DISABLE_SSL = os.getenv("MYSQL_BLOGS_DISABLE_SSL", 1)
+    PRODUCTION_DATABASE = secretVault.getProductionDatabase()
+    TESTING_DATABASE = secretVault.getTestDatabase()
+    MYSQL_JK_USERNAME = secretVault.getMySQLJKUsername()
+    MYSQL_JK_PASSWORD = secretVault.getMySQLJKPassword()
+    MYSQL_HOST = secretVault.getMySQLHost()
+    MYSQL_PORT = int(secretVault.getMySQLPort())
+    MYSQL_BLOGS_DISABLE_SSL = secretVault.getMySQLBlogsDisableSSL()
 
     
-    def __init__(self, host = MYSQL_HOST, username = MYSQL_USERNAME, password = MYSQL_PASSWORD,
+    def __init__(self, host = MYSQL_HOST, username = MYSQL_JK_USERNAME, password = MYSQL_JK_PASSWORD,
                  database = None, port = MYSQL_PORT, sslDisabled = MYSQL_BLOGS_DISABLE_SSL, 
                  testing = False):
 
