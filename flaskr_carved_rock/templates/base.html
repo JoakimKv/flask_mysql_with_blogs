@@ -1,5 +1,7 @@
 <!doctype html>
-<img src="/static/carved-rock-logo-black.png">
+<a href="{{ url_for('index') }}">
+  <img src="{{ url_for('static', filename='carved-rock-logo-black.png') }}" alt="Carved Rock">
+</a>
 <title>{% block title %}{% endblock %} - Flaskr</title>
 <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
 <nav>

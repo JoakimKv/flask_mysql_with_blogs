@@ -81,6 +81,14 @@ On windows 11 (and an ubuntu server):
 
 - The flask app is running in a docker. The nginx and the mysql database is run on a ubuntu server, they are not dockerized and are run with services on the ubuntu server. The file 'blogs.conf' is needed to configure the different ports that are used to run the program.
 
+## Environmental variables and secrets
+
+There are two environmental variables which are recommended to be set on the Ubunbtu server:
+- MYSQL_GIT_JK_USERNAME and MYSQL_GIT_JK_PASSWORD which is your username and password for the none root user for mysql.
+
+These secrets in your repository must be set (stored in your github repository):
+- The secrets in 'deploy.yml' (where 'secrets.' has been added to the code): secrets.SERVER_IP (Ubuntu server ip), secrets.SERVER_ROOT_USERNAME (the username for root, often root) and secrets.SSH_PRIVATE_KEY (your ssh key to connect to the server).
+
 ## Running pytests
 
 The following pytests can be run (in 'flask_mysql_with_blogs' folder):
