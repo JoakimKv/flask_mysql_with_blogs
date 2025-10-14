@@ -2,7 +2,7 @@
 (Set-ExecutionPolicy RemoteSigned -Scope CurrentUser)
 (python -m venv venvflask1)
 (venvflask1\Scripts\activate)
-(pip install -r requirements.txt)
+(python -m pip install -r requirements.txt)
 (pip freeze > requirements.txt)
 (python -m flask run --host=0.0.0.0 --port=5000 --debug)
 
