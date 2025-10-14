@@ -34,8 +34,9 @@ jobs:
             # Clone repo fresh.
             git clone https://github.com/JoakimKV/flask_mysql_with_blogs.git /opt/flask_mysql_with_blogs
 
-            # Copy secrets from another .env file into the .env file in the project.
-            cp /etc/secrets/mysql/keys/.env /opt/flask_mysql_with_blogs/.env
+            # Copy secrets from another .env file (.flask_env) into the .env file (.flask_env) 
+            # in the project.
+            cp /etc/secrets/mysql/keys/.flask_env /opt/flask_mysql_with_blogs/.flask_env
 
             cd /opt/flask_mysql_with_blogs
 
@@ -51,7 +52,7 @@ jobs:
 
             # Restart Docker app container (Flask only).
             docker compose down
-            docker compose --env-file /etc/secrets/mysql/keys/.env up -d --build app
+            docker compose --env-file /etc/secrets/mysql/keys/.flask_env up -d --build app
 
             # Reload Nginx if config changed.
             sudo systemctl daemon-reload

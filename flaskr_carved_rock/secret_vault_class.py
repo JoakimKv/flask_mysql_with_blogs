@@ -15,18 +15,22 @@ class SecretVault:
       # Detect the current OS.
       self.currentOS = platform.system()
 
-      # Default: assume local Windows development
+      # Default: assume local Windows development.
+
       if self.currentOS == "Windows":
 
          # Path to .django_env on your Windows machine.
+
          self.envPath = Path(__file__).resolve().parent / ".flask_env"
          self.isOnServer = False
          self.debugMode = True
 
       # Otherwise assume Ubuntu server.
+      
       else:
 
          # Path where you keep secrets on your production server.
+
          self.envPath = Path("/etc/secrets/mysql/keys/.flask_env")
          self.isOnServer = True
          self.debugMode = False

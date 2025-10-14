@@ -1,0 +1,10 @@
+MYSQL_USERNAME=your_mysql_root_username
+MYSQL_PASSWORD=your_mysql_root_password
+MYSQL_JK_USERNAME=your_mysql_other_username
+MYSQL_JK_PASSWORD=your_mysql_other_password
+MYSQL_HOST=127.0.0.1 (windows) or host.docker.internal (ubuntu server) 
+MYSQL_PORT=3306
+MYSQL_BLOGS_DISABLE_SSL=1
+OPENAI_API_KEY=sk-...(your openai key - not needed here - fill in something)
+SECRET_KEY_SEASONS=...(not needed here - fill in something)
+SECRET_KEY=django-insecure-...(not needed here - fill in something)
