@@ -1,8 +1,7 @@
 
 # Flask Project – Flask and mysql with blogs
 
-A **Flask web application** that demonstrates clean application structure, database modeling, and testing.  
-The project uses **MySQL** as the backend database (but it can easily be switched to another mysql database by editing a single configuration class).
+A **Flask web application** that demonstrates clean application structure, database modeling, and testing. This project, which is about blogs, is connected with my django project, which is about seasonal works in ArsMagica. This project takes care of the endpoint "blogs/". The project uses **MySQL** as the backend database (but it can easily be switched to another mysql database by editing a single configuration class).
 
 I was inspired by a Pluralsight course on Flask where SQLite is used. This project has been adapted and extended for further development by **Joakim Kvistholm** to work with a 'real' mysql database. In this project I use a mysql server for both the test and production database which are running by docker and I am using HeidiSQL as an extra database handler. All this takes the program one step closer to work as a 'real' web page with a 'real' production database on a server.  
 
@@ -11,7 +10,7 @@ I was inspired by a Pluralsight course on Flask where SQLite is used. This proje
 ## Features  
 
 - User authentication with hashed passwords.  
-- Blog posts with authors, timestamps, and tags.  
+- Blog posts with users, timestamps, and tags.  
 - Relational database schema with proper foreign keys.  
 - Alembic database migrations.  
 - Configurable database connection via `DatabaseConnectionData`.  
@@ -31,9 +30,12 @@ A simplified overview:
 - The main folder: -> 'flask_mysql_with_blogs'.
 
 - 'flaskr_carved_rock': -> Main Flask application package (inside the main folder).
+
 - 'migrations': -> Alembic migration scripts (inside the main folder).
+
 - 'tests': -> Unit and integration tests (inside the main folder).
 
+---
 
 Note that there is a folder called 'heidisql' that contains three mysql scripts that can be run in 'HeidiSQL':
 
@@ -61,7 +63,7 @@ Sample schema and data are provided in ('db_flask1.sql').
 
 On windows 11 (and an ubuntu server):
 
-- Install nginx and get the certificate for https (for your hostname). Use my 'blogs.conf' (on ubuntu server in '/etc/nginx/sites-available' and in this project in 'nginx' folder). This is the final version of this file 'after' the certificate is issued and you need to adapt it to your own server. The 'blogs_temp.conf' is the 'blogs.conf' file before you retrieve your needed certificate and it may need to be adapted to your own server.
+- Install nginx and get the certificate for https (for your hostname). Use my 'blogs_seasons.conf' (on ubuntu server in '/etc/nginx/sites-available' and in this project in 'nginx' folder). This is the same file as corresponding file in my django project. This project has the endpoint 'localhost:5000/blogs' in debug mode. This is the final version of this file 'after' the certificate is issued and you need to adapt it to your own server. The 'blogs_seasons_temp.conf' is the 'blogs_seasons.conf' file before you retrieve your needed certificate and it may need to be adapted to your own server. Note that for the Flask and Django project 'blogs_seasons.conf' is the same file that is stored on the ubuntu server. 
 
 - To start the virtual environment: python -m venv venvflask1
 
@@ -69,25 +71,22 @@ On windows 11 (and an ubuntu server):
 
 - To activate script and environment: venvflask1\Scripts\activate
 
-- To install packages: pip install -r requirements.txt
+- To install packages: python -m pip install -r requirements.txt
 
-- If you want to install all the package manually then the file 'pip_install.txt' can be of use. 
+- If you want to install all the package manually then the file 'pip_install_info.txt' can be of use. 
 
 - Don't forget to populate your mysql database from 'db_flask1.sql' in the 'heidisql' folder.
 
 - To start the server (in debug mode): python -m flask run --host=0.0.0.0 --port=5000 --debug
 
-- Then write the following in a web browser: localhost:5000 or your own "server adress".
+- Then write the following in a web browser: localhost:5000/blogs or your own "server adress".
 
-- The flask app is running in a docker. The nginx and the mysql database is run on a ubuntu server, they are not dockerized and are run with services on the ubuntu server. The file 'blogs.conf' is needed to configure the different ports that are used to run the program.
+- The flask app is running in a docker. The nginx and the mysql database is run on a ubuntu server, they are not dockerized and are run with services on the ubuntu server. The file 'blogs_seasons.conf' is needed to configure the different ports that are used to run the programs (the containarized apps: the 'Django app' and the 'Flask app').
 
 ## Environmental variables and secrets
 
-There are two environmental variables which are recommended to be set on the Ubunbtu server:
-- MYSQL_GIT_JK_USERNAME and MYSQL_GIT_JK_PASSWORD which is your username and password for the none root user for mysql.
-
 These secrets in your repository must be set (stored in your github repository):
-- The secrets in 'deploy.yml' (where 'secrets.' has been added to the code): secrets.SERVER_IP (Ubuntu server ip), secrets.SERVER_ROOT_USERNAME (the username for root, often root) and secrets.SSH_PRIVATE_KEY (your ssh key to connect to the server).
+- The secrets in 'deploy.yml' (where 'secrets.' has been added to the code): secrets.SERVER_IP (Ubuntu server ip), secrets.SERVER_ROOT_USERNAME (the username for root, often root) and secrets.SSH_PRIVATE_KEY (your ssh key to connect to the server). They are stored in '.flask_env', see '.flask_env.example', for how it can look. The 'SecretVault' class (in the file 'secret_vault_class.py') handles these secrets. On the Ubuntu server they are stored in '/etc/secrets/mysql/keys/.flask_env'.
 
 ## Running pytests
 
@@ -99,7 +98,6 @@ The following pytests can be run (in 'flask_mysql_with_blogs' folder):
 - pytest tests/test_blog.py
 - pytest tests/test_delete_account.py
 - pytest tests/test_change_password.py
-
 
 ## Author
 
