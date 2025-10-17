@@ -46,7 +46,14 @@ def create_app(testing = False):
         TESTING = testing,
         SQLALCHEMY_DATABASE_URI = f"mysql+pymysql://{username}:{password}@{host}:{port}/{database}?{sslParam}"
     )
-    
+
+   # Dynamic link back to Django app (for templates).
+    app.config["DJANGO_URL"] = (
+        "https://kvistholm.net/"
+        if not app.debug
+        else "http://localhost:8000/"
+    )
+
     try:
         os.makedirs(app.instance_path)
     except OSError:
@@ -76,6 +83,12 @@ def create_app(testing = False):
     app.register_blueprint(auth.bp, url_prefix="/blogs")
     app.register_blueprint(blog.bp, url_prefix="/blogs")
 
+    # Make DJANGO_URL globally available in templates.
+    @app.context_processor
+    def inject_django_url():
+        
+        return {"DJANGO_URL": app.config["DJANGO_URL"]}
+
     # Index route.
     @app.route("/")
     def index():
@@ -90,3 +103,4 @@ def create_app(testing = False):
         return "Hello, World!", 200, {"Content-Type": "text/plain"}
 
     return app
+

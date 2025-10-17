@@ -6,7 +6,9 @@
 
 {% block content %}
 <p>Are you sure you want to delete your account <strong>{{ current_user.username }}</strong>?</p>
-<p>This action cannot be undone. Please enter your password to confirm.</p>
+<p>
+  This action cannot be undone. This will also delete your blog posts. Please enter your password to confirm.
+</p>
 
 <form method="post" action="{{ url_for('auth.delete_account') }}">
   <label for="password">Confirm Password:</label>
