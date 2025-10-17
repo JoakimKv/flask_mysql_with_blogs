@@ -7,6 +7,7 @@ import pytest
 from uuid import uuid4
 from sqlalchemy.orm import sessionmaker
 from flask.testing import FlaskClient
+from flask import url_for
 from flaskr_carved_rock import create_app
 from flaskr_carved_rock.sqla import sqla
 from flaskr_carved_rock.models import User
@@ -135,12 +136,17 @@ class AuthActions:
 
         self._client = client
 
+    def _url(self, endpoint: str) -> str:
+        # Build URL for an endpoint within an app context, so prefixes are respected
+        with self._client.application.test_request_context():
+            return url_for(endpoint)
+
     def login(self, username="testuser", password="testpass"):
 
         """Log in with default test credentials."""
 
         return self._client.post(
-            "/auth/login",
+            self._url("auth.login"),
             data={"username": username, "password": password},
             follow_redirects=True
         )
@@ -149,7 +155,7 @@ class AuthActions:
 
         """Log out the current test user."""
 
-        return self._client.get("/auth/logout", follow_redirects=True)
+        return self._client.get(self._url("auth.logout"), follow_redirects=True)
 
 
 # -----------------------------

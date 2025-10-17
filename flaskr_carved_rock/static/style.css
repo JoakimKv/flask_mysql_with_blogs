@@ -132,3 +132,10 @@ input[type=submit] {
   align-self: start;
   min-width: 10em;
 }
+
+/* Ensure Carved Rock logo scales with page width */
+.logo-img {
+  display: block;
+  width: 100%;
+  height: auto;
+}

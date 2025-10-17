@@ -3,7 +3,7 @@
 
 
 import os
-from flask import Flask, render_template
+from flask import Flask, render_template, redirect, url_for
 from flask_login import LoginManager
 from flaskr_carved_rock.sqla import sqla
 
@@ -61,7 +61,7 @@ def create_app(testing = False):
     @login_manager.user_loader
     def load_user(user_id):
 
-        return User.query.filter_by(uuid=user_id).first()
+        return User.query.filter_by(uuid = user_id).first()
 
     # Initialize database commands
     from flaskr_carved_rock import db
@@ -72,14 +72,16 @@ def create_app(testing = False):
 
     # Register blueprints
     from flaskr_carved_rock import auth, blog
-    app.register_blueprint(auth.bp)
-    app.register_blueprint(blog.bp)
+    # Mount blog under /blogs and auth under /blogs/auth (auth bp already has /auth prefix)
+    app.register_blueprint(auth.bp, url_prefix="/blogs")
+    app.register_blueprint(blog.bp, url_prefix="/blogs")
 
-    # Index route
+    # Index route.
     @app.route("/")
     def index():
 
-        return render_template("index.html", title = "Posts - Flaskr")
+        # Delegate to the blog blueprint's index so data/context stays consistent
+        return redirect(url_for("blog.index"))
 
     # Optional route for testing
     @app.route("/hello")

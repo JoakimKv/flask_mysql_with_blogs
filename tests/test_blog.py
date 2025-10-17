@@ -43,15 +43,15 @@ def test_index(client, auth, test_post):
     """Index page shows posts when logged in."""
 
     auth.login()
-    response = client.get("/")
+    response = client.get("/blogs/")
     assert response.status_code == 200
     assert b"Log Out" in response.data
     assert b"test title" in response.data
 
 @pytest.mark.parametrize("path,next_url", [
-    ("/create", "/create"),
-    ("/1/update", "/1/update"),
-    ("/1/delete", "/1/delete")
+    ("/blogs/create", "/blogs/create"),
+    ("/blogs/1/update", "/blogs/1/update"),
+    ("/blogs/1/delete", "/blogs/1/delete")
 ])
 def test_login_required(client, path, next_url):
 
@@ -60,7 +60,8 @@ def test_login_required(client, path, next_url):
     response = client.post(path, follow_redirects=False)
     assert response.status_code == 302
     location = unquote(response.headers["Location"])
-    assert f"/auth/login?next={next_url}" in location
+    assert location.startswith("/blogs/")
+    assert location.endswith(f"/login?next={next_url}")
 
 def test_author_required(client, auth, app, test_post):
 
@@ -77,8 +78,8 @@ def test_author_required(client, auth, app, test_post):
         post.author_id = other_user.id
         sqla.session.commit()
 
-    resp_update = client.post(f"/{test_post}/update", follow_redirects=False)
-    resp_delete = client.post(f"/{test_post}/delete", follow_redirects=False)
+    resp_update = client.post(f"/blogs/{test_post}/update", follow_redirects=False)
+    resp_delete = client.post(f"/blogs/{test_post}/delete", follow_redirects=False)
     assert resp_update.status_code == 403
     assert resp_delete.status_code == 403
 
@@ -87,7 +88,7 @@ def test_exists_required(client, auth):
     """Updating/deleting non-existent posts returns 404."""
 
     auth.login()
-    for path in ("/999/update", "/999/delete"):
+    for path in ("/blogs/999/update", "/blogs/999/delete"):
 
         response = client.post(path, follow_redirects=False)
         assert response.status_code == 404
@@ -97,7 +98,7 @@ def test_create(client, auth, app):
     """A logged-in user can create posts."""
 
     auth.login()
-    response = client.post("/create", data={"title": "created", "body": "new body"}, follow_redirects=False)
+    response = client.post("/blogs/create", data={"title": "created", "body": "new body"}, follow_redirects=False)
     assert response.status_code == 302
 
     with app.app_context():
@@ -112,7 +113,7 @@ def test_update(client, auth, app, test_post):
 
     auth.login()
     response = client.post(
-        f"/{test_post}/update",
+        f"/blogs/{test_post}/update",
         data={"title": "updated", "body": "updated body"},
         follow_redirects=True
     )
@@ -129,7 +130,7 @@ def test_create_update_validate(client, auth):
     """Title is required on create and update."""
 
     auth.login()
-    response = client.post("/create", data={"title": "", "body": "body"}, follow_redirects=True)
+    response = client.post("/blogs/create", data={"title": "", "body": "body"}, follow_redirects=True)
     assert b"Title is required." in response.data
 
 def test_delete(client, auth, app, test_post):
@@ -137,7 +138,7 @@ def test_delete(client, auth, app, test_post):
     """A logged-in user can delete their post."""
 
     auth.login()
-    response = client.post(f"/{test_post}/delete", follow_redirects=False)
+    response = client.post(f"/blogs/{test_post}/delete", follow_redirects=False)
     assert response.status_code == 302
 
     with app.app_context():

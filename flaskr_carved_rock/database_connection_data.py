@@ -3,7 +3,7 @@
 
 
 import os
-from secret_vault_class import SecretVault 
+from .secret_vault_class import SecretVault 
 
 
 class DatabaseConnectionData:

@@ -4,6 +4,7 @@
 # tests/test_delete_account.py
 
 import pytest
+from flask import url_for
 from flaskr_carved_rock.models import User, Post
 from flaskr_carved_rock.sqla import sqla
 
@@ -35,6 +36,11 @@ def test_user_with_posts(app):
         sqla.session.query(User).filter_by(username="kalle_test").delete()
         sqla.session.commit()
 
+def _endpoint_url(client, endpoint: str) -> str:
+    with client.application.test_request_context():
+        return url_for(endpoint)
+
+
 def test_delete_own_account(auth, client, app):
     
     """A logged-in user can delete their own account."""
@@ -43,7 +49,7 @@ def test_delete_own_account(auth, client, app):
     auth.login(username="testuser", password="testpass")
 
     # Send POST to delete_account
-    response = client.post("/auth/delete_account", follow_redirects=True)
+    response = client.post(_endpoint_url(client, "auth.delete_account"), follow_redirects=True)
     assert response.status_code == 200
     assert b"Your account has been deleted permanently." in response.data
 
@@ -68,7 +74,7 @@ def test_cannot_delete_other_user_account(auth, client, app):
         assert other_user is not None
 
     # Attempt to delete current user (the route always deletes current_user)
-    response = client.post("/auth/delete_account", follow_redirects=True)
+    response = client.post(_endpoint_url(client, "auth.delete_account"), follow_redirects=True)
     assert response.status_code == 200
 
     # The flash message should indicate deletion of the current user, not other_user

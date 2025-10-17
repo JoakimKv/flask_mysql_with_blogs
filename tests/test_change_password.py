@@ -3,6 +3,7 @@
 
 
 import pytest
+from flask import url_for
 from flaskr_carved_rock.models import User
 from flaskr_carved_rock.sqla import sqla
 
@@ -30,6 +31,11 @@ def password_user(app):
         sqla.session.commit()
 
 
+def _endpoint_url(client, endpoint: str) -> str:
+    with client.application.test_request_context():
+        return url_for(endpoint)
+
+
 def test_change_password(auth, client, app, password_user):
     
     """A logged-in user can change their password and log in with the new one."""
@@ -39,7 +45,7 @@ def test_change_password(auth, client, app, password_user):
 
     # Change password
     response = client.post(
-        "/auth/change_password",
+        _endpoint_url(client, "auth.change_password"),
         data={
             "current_password": "oldpass234",
             "new_password": "newpass456",
@@ -58,11 +64,11 @@ def test_change_password(auth, client, app, password_user):
         assert not user.correct_password("oldpass234")
 
     # Log out
-    client.get("/auth/logout", follow_redirects=True)
+    client.get(_endpoint_url(client, "auth.logout"), follow_redirects=True)
 
     # Verify login works with new password, not old
     login_resp = client.post(
-        "/auth/login",
+        _endpoint_url(client, "auth.login"),
         data={"username": "pwd_tester", "password": "newpass456"},
         follow_redirects=True,
     )
@@ -76,7 +82,7 @@ def test_change_password_wrong_current(auth, client, app, password_user):
     auth.login(username="pwd_tester", password="oldpass234")
 
     response = client.post(
-        "/auth/change_password",
+        _endpoint_url(client, "auth.change_password"),
         data={
             "current_password": "wrongpass",
             "new_password": "newpass456",
@@ -101,7 +107,7 @@ def test_change_password_mismatch(auth, client, app, password_user):
     auth.login(username="pwd_tester", password="oldpass234")
 
     response = client.post(
-        "/auth/change_password",
+        _endpoint_url(client, "auth.change_password"),
         data={
             "current_password": "oldpass234",
             "new_password": "newpass456",
@@ -128,7 +134,7 @@ def test_change_then_delete_account(auth, client, app, password_user):
 
     # Change password
     client.post(
-        "/auth/change_password",
+        _endpoint_url(client, "auth.change_password"),
         data={
             "current_password": "oldpass234",
             "new_password": "newpass456",
@@ -138,7 +144,7 @@ def test_change_then_delete_account(auth, client, app, password_user):
     )
 
     # Delete account
-    response = client.post("/auth/delete_account", follow_redirects=True)
+    response = client.post(_endpoint_url(client, "auth.delete_account"), follow_redirects=True)
     assert response.status_code == 200
     assert b"Your account has been deleted permanently." in response.data
 
