@@ -21,7 +21,7 @@ I was inspired by a Pluralsight course on Flask where SQLite is used. This proje
 
 ## Extra Information
 
-All users (that are not test users for pytest) have the password `root`. It is recommended to look at 'pip_install_info.txt' here is a lot of important information and useful commands if you want to use the project.
+All users (that are not test users for pytest) have the password `root`. It is recommended to look at 'pip_install_info.txt' here is a lot of important information and useful commands if you want to use the project. My domain is 'kvistholm.net' at the time of creating this project, but you may have to change this domain name with your own domain name especially in nginx's 'blogs_seasons.conf' but also in many other places.
 
 ## Project Structure  
 
