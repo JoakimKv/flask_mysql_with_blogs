@@ -81,7 +81,7 @@ On windows 11 (and an ubuntu server):
 
 - Then write the following in a web browser: localhost:5000/blogs or your own "server adress".
 
-- The flask app is running in a docker. The nginx and the mysql database is run on a ubuntu server, they are not dockerized and are run with services on the ubuntu server. The file 'blogs_seasons.conf' is needed to configure the different ports that are used to run the programs (the containarized apps: the 'Django app' and the 'Flask app').
+- The flask app is running in a docker. The nginx and the mysql database is run on a ubuntu server, they are not dockerized and are run with services on the ubuntu server. The file 'blogs_seasons.conf' with the use of nginx is needed to configure the different ports that are used to run the programs (the containarized apps: the 'Django app' and the 'Flask app').
 
 ## Environmental variables and secrets
 
@@ -98,6 +98,8 @@ The following pytests can be run (in 'flask_mysql_with_blogs' folder):
 - pytest tests/test_blog.py
 - pytest tests/test_delete_account.py
 - pytest tests/test_change_password.py
+
+The tests should not be run on the ubuntu server as not to effect your real production database and if the test works on your local windows machine they will work on the ubuntu server, since they are using the same authorizations and the same endpoints.
 
 ## Author
 
