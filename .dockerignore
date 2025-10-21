@@ -1,0 +1,100 @@
+# ---- Python cache / build artifacts ----
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+
+build/
+dist/
+*.egg-info/
+.eggs/
+pip-wheel-metadata/
+*.egg
+*.manifest
+*.spec
+MANIFEST
+
+# ---- Virtual environments ----
+.venv
+venv/
+ENV/
+env/
+env.bak/
+venv.bak/
+venvflask1/
+
+# ---- Environment / secrets ----
+.env
+.flask_env
+*.env.*
+!.env.example
+!.flask_env.example
+flask_mysql_with_blogs_secret_github_keys.txt
+
+# ---- Test, coverage, cache ----
+.tox/
+.nox/
+.coverage
+.coverage.*
+.cache
+.pytest_cache/
+htmlcov/
+nosetests.xml
+coverage.xml
+*.cover
+*.py,cover
+.hypothesis/
+.dmypy.json
+.mypy_cache/
+.pyre/
+
+# ---- Logs ----
+*.log
+
+# ---- Databases ----
+db.sqlite3
+db.sqlite3-journal
+
+# ---- Flask / instance files ----
+instance/
+.webassets-cache
+
+# ---- Docs ----
+docs/_build/
+site/
+target/
+
+# ---- IDE / editors ----
+.vscode/
+.spyderproject
+.spyproject
+.ropeproject
+
+# ---- OS / misc ----
+.DS_Store
+Thumbs.db
+
+# ---- Notebooks ----
+.ipynb_checkpoints/
+
+# ---- Dependency / packaging tools ----
+__pypackages__/
+.python-version
+celerybeat-schedule
+celerybeat.pid
+
+# ---- Ignore project config files not needed in image ----
+Pipfile
+Pipfile.lock
+requirements-dev.txt
+
+# ---- Git / version control ----
+.git/
+.gitignore
+.gitmodules
+
+# ---- Docker meta ----
+docker-compose*.yml
+*.dockerfile
+Dockerfile.local
+Dockerfile.dev
