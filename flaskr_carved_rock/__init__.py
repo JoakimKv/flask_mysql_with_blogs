@@ -9,10 +9,7 @@ from werkzeug.middleware.proxy_fix import ProxyFix
 from flaskr_carved_rock.sqla import sqla
 
 from flaskr_carved_rock.database_connection_data import DatabaseConnectionData
-from .secret_vault_class import SecretVault
 
-
-secretVault = SecretVault()
 
 login_manager = LoginManager()
 login_manager.login_view = 'auth.login'  # redirect unauthorized users to login
@@ -63,7 +60,7 @@ def create_app(testing = False):
    # Dynamic link back to Django app (for templates).
     app.config["DJANGO_URL"] = (
         "https://kvistholm.net/"
-        if not secretVault.getDebugMode()
+        if not app.debug
         else "http://localhost:8000/"
     )
 
