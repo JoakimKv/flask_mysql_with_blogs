@@ -37,7 +37,8 @@ def create_app(testing = False):
         __name__,
         instance_relative_config=True,
         template_folder=os.path.join(os.path.dirname(__file__), "templates"),
-        static_folder=os.path.join(os.path.dirname(__file__), "static")
+        static_folder=os.path.join(os.path.dirname(__file__), "static"),
+        static_url_path="/blogs/static"
     )
 
     app.url_map.strict_slashes = False
@@ -91,12 +92,16 @@ def create_app(testing = False):
         
         return {"DJANGO_URL": app.config["DJANGO_URL"]}
 
-    # Index route.
+    # Root: redirect to Django site
     @app.route("/")
+    def root():
+
+        return redirect(app.config["DJANGO_URL"])  # 302 by default
+
+    # Blogs index: serve Flask blog
     @app.route("/blogs")
     def index():
 
-        # Show the blog homepage directly
         return render_template("blog/index.html")
 
     # Optional route for testing
@@ -106,4 +111,3 @@ def create_app(testing = False):
         return "Hello, World!", 200, {"Content-Type": "text/plain"}
 
     return app
-
