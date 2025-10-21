@@ -5,10 +5,14 @@
 import os
 from flask import Flask, render_template, redirect, url_for
 from flask_login import LoginManager
+from werkzeug.middleware.proxy_fix import ProxyFix
 from flaskr_carved_rock.sqla import sqla
 
 from flaskr_carved_rock.database_connection_data import DatabaseConnectionData
+from .secret_vault_class import SecretVault
 
+
+secretVault = SecretVault()
 
 login_manager = LoginManager()
 login_manager.login_view = 'auth.login'  # redirect unauthorized users to login
@@ -50,10 +54,16 @@ def create_app(testing = False):
         SQLALCHEMY_DATABASE_URI = f"mysql+pymysql://{username}:{password}@{host}:{port}/{database}?{sslParam}"
     )
 
+    # Respect proxy headers for correct URL generation
+    app.wsgi_app = ProxyFix(app.wsgi_app, x_for=1, x_proto=1, x_host=1)
+
+    # Prefer https in production for external URL generation
+    app.config["PREFERRED_URL_SCHEME"] = "https" if not app.debug else "http"
+
    # Dynamic link back to Django app (for templates).
     app.config["DJANGO_URL"] = (
         "https://kvistholm.net/"
-        if not app.debug
+        if not secretVault.getDebugMode()
         else "http://localhost:8000/"
     )
 
