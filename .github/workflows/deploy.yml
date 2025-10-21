@@ -51,12 +51,9 @@ jobs:
             # in the project.
             cp /etc/secrets/mysql/keys/.flask_env /opt/flask_mysql_with_blogs/.flask_env
 
-            cd /opt/flask_mysql_with_blogs
-
             # Install Python dependencies.
 
             cd /opt/flask_mysql_with_blogs
-
 
             python -m venv venvflask1
             source venvflask1/bin/activate
