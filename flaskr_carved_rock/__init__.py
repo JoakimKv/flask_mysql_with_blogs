@@ -111,12 +111,7 @@ def create_app(testing=False):
 
         return redirect(app.config["DJANGO_URL"])
 
-    @app.route("/blogs", strict_slashes=False)
-    def blogs_index():
-
-        """Serve the blog index page."""
-
-        return render_template("blog/index.html")
+    # Blog index is served by the blog blueprint mounted at /blogs/
 
     @app.route("/hello")
     def hello():

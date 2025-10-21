@@ -61,12 +61,12 @@ def delete_account():
             user = sqla.session.get(User, current_user.id)
             if not user:
                 flash("User not found.")
-                return redirect(url_for("index"))
+                return redirect(url_for("blog.index"))
 
             # Ensure user is deleting their own account
             if user.id != current_user.id:
                 flash("You cannot delete another user's account.")
-                return redirect(url_for("index"))
+                return redirect(url_for("blog.index"))
 
             # Delete user and cascade posts
             sqla.session.delete(user)
@@ -74,7 +74,7 @@ def delete_account():
 
             logout_user()
             flash("Your account has been deleted permanently.")
-            return redirect(url_for("index"))
+            return redirect(url_for("blog.index"))
 
         except Exception as e:
 
@@ -103,7 +103,7 @@ def change_password():
         if not user:
 
             flash("User not found.")
-            return redirect(url_for("index"))
+            return redirect(url_for("blog.index"))
 
         # Verify old password
         if not user.correct_password(current_password):
@@ -123,7 +123,7 @@ def change_password():
             user.password = new_password  # triggers hash in User model validate
             sqla.session.commit()
             flash("Password updated successfully.")
-            return redirect(url_for("index"))
+            return redirect(url_for("blog.index"))
         
         except Exception as e:
 
@@ -159,7 +159,7 @@ def login():
         if next_url and not is_safe_redirect_url(next_url):
             return abort(400)
 
-        return redirect(next_url or url_for("index"))
+        return redirect(next_url or url_for("blog.index"))
 
     return render_template("auth/login.html")
 
