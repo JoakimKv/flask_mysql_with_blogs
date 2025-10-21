@@ -21,8 +21,8 @@ jobs:
           script: |
 
             # Ensure MySQL is running.
-            sudo systemctl enable mysql
-            sudo systemctl start mysql
+            systemctl enable mysql
+            systemctl start mysql
 
             # Remove old project if exists.
             cd /opt
