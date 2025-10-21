@@ -45,7 +45,7 @@ jobs:
             cd /opt
 
             # Clone repo fresh.
-            git clone git@github.com/JoakimKV/flask_mysql_with_blogs.git /opt/flask_mysql_with_blogs
+            git clone https://github.com/JoakimKV/flask_mysql_with_blogs.git /opt/flask_mysql_with_blogs
 
             # Copy secrets from another .env file (.flask_env) into the .env file (.flask_env) 
             # in the project.
