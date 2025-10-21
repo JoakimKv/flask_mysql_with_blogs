@@ -105,7 +105,9 @@ def create_app(testing = False):
 
         return redirect(app.config["DJANGO_URL"])  # 302 by default
 
-    # Blogs index: serve Flask blog
+    # Blogs index: serve Flask blog.
+
+    @app.route("/blogs/")
     @app.route("/blogs")
     def index():
 
