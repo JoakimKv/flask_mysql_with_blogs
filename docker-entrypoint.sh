@@ -8,4 +8,4 @@ echo "[Entrypoint] Starting Flask app with Gunicorn..."
 # Example: database migrations (Alembic) or copying demo data
 # flask db upgrade || true
 
-exec gunicorn -w 4 -b 0.0.0.0:5000 flaskr_carved_rock:create_app
+exec gunicorn -w 4 -b 0.0.0.0:5000 "flaskr_carved_rock:create_app()"
