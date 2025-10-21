@@ -40,6 +40,8 @@ def create_app(testing = False):
         static_folder=os.path.join(os.path.dirname(__file__), "static")
     )
 
+    app.url_map.strict_slashes = False
+
     app.config.from_mapping(
         SECRET_KEY = os.getenv("SECRET_KEY_BLOGS", "dev"),
         SQLALCHEMY_TRACK_MODIFICATIONS = False,
@@ -91,10 +93,11 @@ def create_app(testing = False):
 
     # Index route.
     @app.route("/")
+    @app.route("/blogs")
     def index():
 
-        # Delegate to the blog blueprint's index so data/context stays consistent
-        return redirect(url_for("blog.index"))
+        # Show the blog homepage directly
+        return render_template("blog/index.html")
 
     # Optional route for testing
     @app.route("/hello")
