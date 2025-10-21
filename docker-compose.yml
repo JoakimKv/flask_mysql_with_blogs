@@ -1,10 +1,39 @@
 services:
-  app:
-    build: .
+  flask_app:
+    container_name: flask_mysql_with_blogs
+    build:
+      context: .
+      dockerfile: Dockerfile
     restart: always
+
+    # Expose Flask (Gunicorn) on port 5000 → available externally on port 8000
+    ports:
+      - "5000:5000"
+
+    # Load secrets from host system
+    env_file:
+      - /etc/secrets/mysql/keys/.flask_env
+
+    # Mount env file (read-only) into container for reference if needed
+    volumes:
+      - /etc/secrets/mysql/keys/.flask_env:/etc/secrets/mysql/keys/.flask_env:ro
+
+    # Allow Flask to reach MySQL (hosted on same server or Docker network)
     extra_hosts:
       - "host.docker.internal:host-gateway"
-    env_file:
-      - /etc/secrets/mysql/keys/.env
-    ports:
-      - "8000:8000"
+
+    # Place container on same shared backend network as Django + MySQL + Nginx
+    networks:
+      - kvistholm_backend
+
+    # Optional health check for Flask app (Gunicorn)
+    healthcheck:
+      test: ["CMD-SHELL", "curl -f http://localhost:5000 || exit 1"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+      start_period: 20s
+
+networks:
+  kvistholm_backend:
+    driver: bridge

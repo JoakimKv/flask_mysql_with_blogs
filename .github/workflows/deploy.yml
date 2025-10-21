@@ -63,7 +63,7 @@ jobs:
             # Restart Docker app container (Flask only).
 
             docker compose down
-            docker compose --env-file /etc/secrets/mysql/keys/.flask_env up -d --build app
+            docker compose --env-file /etc/secrets/mysql/keys/.flask_env up -d --build flask_app
 
             # Reload Nginx if config changed.
 
