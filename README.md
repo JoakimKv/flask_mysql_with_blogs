@@ -3,8 +3,10 @@
 
 A **Flask web application** that demonstrates clean application structure, database modeling, and testing. This project, which is about blogs, is connected with my django project, which is about seasonal works in ArsMagica. This project takes care of the endpoint "blogs/". The project uses **MySQL** as the backend database (but it can easily be switched to another mysql database by editing a single configuration class).
 
-I was inspired by a Pluralsight course on Flask where SQLite is used. This project has been adapted and extended for further development by **Joakim Kvistholm** to work with a 'real' mysql database. In this project I use a mysql server for both the test and production database which are running by docker and I am using HeidiSQL as an extra database handler. All this takes the program one step closer to work as a 'real' web page with a 'real' production database on a server.  
+I was inspired by a Pluralsight course on Flask where SQLite is used. This project has been adapted and extended for further development by **Joakim Kvistholm** to work with a 'real' mysql database. In this project I use a mysql server for both the test and production database which are running by docker on my windows machine and I am using HeidiSQL as an extra database handler. On the Ubuntu server mysql is running as a service and is not dockerized. All of this brings the project closer to a production-ready web application, deployed with a real MySQL server.  
 
+This project uses **GitHub Actions** for automated deployment to my Ubuntu production server. Whenever new code is pushed to the `main` branch, the workflow defined in `.github/workflows/deploy.yml` runs automatically and updates my server with this new code.
+  
 ---
 
 ## Features  
