@@ -41,11 +41,11 @@ A simplified overview:
 
 Note that there is a folder called 'heidisql' that contains three mysql scripts that can be run in 'HeidiSQL':
 
- - The 'first' script creates the entire database from scratch with tables and data (which is done by running the script 'db_flask1.sql').
+ - The 'first' and 'second' script create the entire database (for the production and the test database respectively) from scratch with tables and data (which is done by running the scripts 'db_flask1.sql' and 'db_carved_rock_test.sql').
 
- - The 'second' script restores the production database 'db_flask1' from the test database 'carved_rock_test' (which is done by running the script 'carved_rock_test_save_from_production_db.sql').
+ - The 'third' script restores the production database 'db_flask1' from the test database 'carved_rock_test' (which is done by running the script 'carved_rock_test_save_from_production_db.sql').
 
-- The 'third' script makes the reverse process: it restores the test database from the production database (which is done by running the script 'db_flask1_save_from_test_db.sql').
+- The 'fourth' script makes the reverse process: it restores the test database from the production database (which is done by running the script 'db_flask1_save_from_test_db.sql').
 
 The last two scripts can be used if an accident happens with the databases. ChatGPT can be used to rewrite the scripts if such a need arises (so it suits your databases).
 
