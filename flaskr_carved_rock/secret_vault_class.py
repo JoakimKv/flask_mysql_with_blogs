@@ -66,7 +66,7 @@ class SecretVault:
       self.secretKey = os.getenv("SECRET_KEY")
       self.secretKeyForDevelopment = os.getenv("SECRET_KEY_SEASONS")
 
-      self.MySQLBlogsDisableSSL = os.getenv("MYSQL_BLOGS_DISABLE_SSL", 0)
+      self.MySQLBlogsDisableSSL = os.getenv("MYSQL_BLOGS_DISABLE_SSL", 1)
 
    def getCurrentOS(self):
 
